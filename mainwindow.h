@@ -21,6 +21,7 @@ public:
 
     void setupUiMore();
     void setNewValue(QLabel *label, QSlider *slider, int value);
+    void fadeColor(int percentHot);
 
 public slots:
     void labelChanged();
@@ -30,6 +31,13 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    QPalette mainWindowPalette;
+    static const int coldR = 212;
+    static const int coldG = 240;
+    static const int coldB = 255;
+    static const int hotR = 255;
+    static const int hotG = 109;
+    static const int hotB = 49;
 };
 
 
