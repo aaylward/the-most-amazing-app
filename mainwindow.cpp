@@ -7,10 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setupUiMore();
-    mainWindowPalette = palette();
-    mainWindowPalette.setColor(backgroundRole(), QColor(coldR, coldG, coldB));
-    mainWindowPalette.setColor(foregroundRole(), QColor(0,0,0));
-    setPalette(mainWindowPalette);
     connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(labelChanged()));
     connect(ui->celsiusSlider, SIGNAL(valueChanged(int)), this, SLOT(celsiusSliderChanged(int)));
     connect(ui->kelvinSlider, SIGNAL(valueChanged(int)), this, SLOT(kelvinSliderChanged(int)));
@@ -27,6 +23,11 @@ void MainWindow::setupUiMore()
     ui->kelvinSlider->setRange(273, 373);
     ui->celsiusSlider->setRange(0, 100);
     ui->farenheitSlider->setRange(32, 212);
+
+    mainWindowPalette = palette();
+    mainWindowPalette.setColor(backgroundRole(), QColor(coldR, coldG, coldB));
+    mainWindowPalette.setColor(foregroundRole(), QColor(0,0,0));
+    setPalette(mainWindowPalette);
 }
 
 void MainWindow::setName(const QString &name)
