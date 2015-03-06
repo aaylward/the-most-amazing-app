@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setupUiMore();
-    connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(labelChanged()));
+    connect(ui->nameInput, SIGNAL(textChanged(QString)), this, SLOT(labelChanged()));
     connect(ui->celsiusSlider, SIGNAL(valueChanged(int)), this, SLOT(celsiusSliderChanged(int)));
     connect(ui->kelvinSlider, SIGNAL(valueChanged(int)), this, SLOT(kelvinSliderChanged(int)));
     connect(ui->farenheitSlider, SIGNAL(valueChanged(int)), this, SLOT(farenheitSliderChanged(int)));
@@ -62,7 +62,7 @@ void MainWindow::setNewValue(QLabel *label, QSlider *slider, int newValue)
 
 QString MainWindow::name() const
 {
-    return ui->lineEdit->text();
+    return ui->nameInput->text();
 }
 
 void MainWindow::labelChanged()
