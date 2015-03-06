@@ -20,6 +20,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupUiMore()
 {
+    int i, newR, newG, newB, newText, inversePercent;
+
     ui->kelvinSlider->setRange(273, 373);
     ui->celsiusSlider->setRange(0, 100);
     ui->farenheitSlider->setRange(32, 212);
@@ -28,6 +30,18 @@ void MainWindow::setupUiMore()
     mainWindowPalette.setColor(backgroundRole(), QColor(coldR, coldG, coldB));
     mainWindowPalette.setColor(foregroundRole(), QColor(0,0,0));
     setPalette(mainWindowPalette);
+
+    for (i=0; i<101; i++) {
+        inversePercent = 100 - i;
+        newR = (((hotR - coldR) * inversePercent)/100) + coldR;
+        newG = (((coldG - hotG) * inversePercent)/100) + hotG;
+        newB = (((coldB - hotB) * inversePercent)/100) + hotB;
+
+        newText = 255 - (inversePercent * 255)/100;
+
+        backgroundColors.push_back(QColor(newR, newG, newB));
+        foregroundColors.push_back(QColor(newText, newText, newText));
+    }
 }
 
 void MainWindow::setName(const QString &name)
@@ -35,7 +49,7 @@ void MainWindow::setName(const QString &name)
     if (name.isEmpty()) {
         ui->label_2->setText("");
     } else {
-        ui->label_2->setText(name + " is your name.");
+        ui->label_2->setText("Hello " + name + "!");
     }
 
 }
@@ -58,13 +72,8 @@ void MainWindow::labelChanged()
 
 void MainWindow::fadeColor(int percentHot)
 {
-    int inversePercent = 100 - percentHot;
-    int newR = (((hotR - coldR) * inversePercent)/100) + coldR;
-    int newG = (((coldG - hotG) * inversePercent)/100) + hotG;
-    int newB = (((coldB - hotB) * inversePercent)/100) + hotB;
-    int newText = 255 - (inversePercent * 255)/100;
-    mainWindowPalette.setColor(backgroundRole(), QColor(newR, newG, newB));
-    mainWindowPalette.setColor(foregroundRole(), QColor(newText, newText, newText));
+    mainWindowPalette.setColor(backgroundRole(), backgroundColors.at(percentHot));
+    mainWindowPalette.setColor(foregroundRole(), foregroundColors.at(percentHot));
     setPalette(mainWindowPalette);
 }
 
