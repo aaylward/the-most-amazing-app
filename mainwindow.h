@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QVector>
 #include "ui_mainwindow.h"
 
 namespace Ui {
@@ -32,12 +33,14 @@ public slots:
 private:
     Ui::MainWindow *ui;
     QPalette mainWindowPalette;
-    static const int coldR = 212;
-    static const int coldG = 240;
-    static const int coldB = 255;
-    static const int hotR = 255;
-    static const int hotG = 109;
-    static const int hotB = 49;
+    static int const coldR = 212;
+    static int const coldG = 240;
+    static int const coldB = 255;
+    static int const hotR = 255;
+    static int const hotG = 109;
+    static int const hotB = 49;
+    QVector<QColor> backgroundColors;
+    QVector<QColor> foregroundColors;
 };
 
 
